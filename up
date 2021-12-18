@@ -26,8 +26,6 @@ nitrogen --head=1 --set-zoom-fill background1.jpg
 #  feh --bg-scale $SCRIPTPATH/background.jpg
 #fi
 
-dunst &
-
 index=0
 monitor="$(polybar -m | grep +0+0 | sed s/:.*// | tac)"
 leftwm-state -q -n -t $SCRIPTPATH/sizes.liquid | sed -r '/^\s*$/d' | while read -r width x y
