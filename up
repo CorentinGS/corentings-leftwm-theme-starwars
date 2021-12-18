@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 export SCRIPTPATH="$( cd "$(dirname "$0")" ; pwd -P )"
 
 # Down the last running theme
@@ -9,16 +9,23 @@ fi
 ln -s $SCRIPTPATH/down /tmp/leftwm-theme-down
 
 # Boot picom or compton if it exists
-picom --experimental-backends > /dev/null &
-
+if [ -x "$(command -v picom)" ]; then
+  picom --experimental-backends &> /dev/null &
+elif [ -x "$(command -v compton)" ]; then
+  compton &> /dev/null &
+fi
 # Set the theme.toml config
 echo "LoadTheme $SCRIPTPATH/theme.toml" > $XDG_RUNTIME_DIR/leftwm/commands.pipe
 
 # Set wallpaper using nitrogen
-nitrogen --head=0 --set-zoom-fill background.jpg
-nitrogen --head=1 --set-zoom-fill background1.jpg
+#nitrogen --head=0 --set-zoom-fill background.jpg
+#nitrogen --head=1 --set-zoom-fill background1.jpg
 
-dunst &
+if [ -x "$(command -v feh)" ]; then
+  feh --bg-scale $SCRIPTPATH/background.jpg
+fi
+
+# dunst &
 
 index=0
 monitor="$(polybar -m | grep +0+0 | sed s/:.*// | tac)"
