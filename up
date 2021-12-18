@@ -19,14 +19,14 @@ fi
 echo "LoadTheme $SCRIPTPATH/theme.toml" > $XDG_RUNTIME_DIR/leftwm/commands.pipe
 
 # Set wallpaper using nitrogen
-#nitrogen --head=0 --set-zoom-fill background.jpg
-#nitrogen --head=1 --set-zoom-fill background1.jpg
+nitrogen --head=0 --set-zoom-fill background.jpg
+nitrogen --head=1 --set-zoom-fill background1.jpg
 
-if [ -x "$(command -v feh)" ]; then
-  feh --bg-scale $SCRIPTPATH/background.jpg
-fi
+#if [ -x "$(command -v feh)" ]; then
+#  feh --bg-scale $SCRIPTPATH/background.jpg
+#fi
 
-# dunst &
+dunst &
 
 index=0
 monitor="$(polybar -m | grep +0+0 | sed s/:.*// | tac)"
