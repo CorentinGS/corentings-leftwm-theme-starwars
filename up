@@ -22,7 +22,7 @@ echo "LoadTheme $SCRIPTPATH/theme.toml" > $XDG_RUNTIME_DIR/leftwm/commands.pipe
 # Set wallpaper using nitrogen
 feh --bg-fill --no-fehbg --randomize "$SCRIPTPATH"/Wallpapers
 
-nm-tray &
+nm-applet &
 
 index=0
 monitor="$(polybar -m | grep +0+0 | sed s/:.*// | tac)"
